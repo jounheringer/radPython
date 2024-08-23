@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,6 +9,14 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'frontAngular17';
+export class AppComponent implements OnInit {
+  message: string = "";
+
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.apiService.getMessage().subscribe(data => {
+      this.message = data.message
+    })
+  }
 }
