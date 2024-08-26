@@ -1,0 +1,22 @@
+@if(items.length === 0) {
+    <div>
+      <h3>Nenhum aluno cadastrado no momento.</h3>
+    </div>
+} @else {
+    <ul class="student-list">
+      @for (item of items; track item){
+        <li>
+          <div class="form-check">
+            <label for="student-List"></label>
+            <input 
+              type="checkbox" 
+              name="student-List"
+              [checked]="item.aproved"
+              [attr.data-index]="$index"
+              (click)="toogleStudent(item)"
+            > {{ item.name }}
+          </div>
+        </li>
+        }
+    </ul>
+}
