@@ -1,7 +1,6 @@
-import { Component, Output } from '@angular/core';
+import { Component, output, Output, EventEmitter } from '@angular/core';
 import { Student } from '../../shared/models/student';
 import { FormsModule } from '@angular/forms';
-import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-add-student-form',
@@ -11,11 +10,11 @@ import { EventEmitter } from 'stream';
   styleUrl: './add-student-form.component.css'
 })
 export class AddStudentFormComponent {
-  // @Output() addStudent = new EventEmitter<>();
+  @Output() addStudent = new EventEmitter<Student>()
   newStudentText = "";
   
-  addNewStudent() {
-    // this.items.push(new Student(this.newStudentText, false))
+  addNewStudent(student: string) {
+    this.addStudent.emit(new Student(student, false))
     this.newStudentText = ""
   }
 }

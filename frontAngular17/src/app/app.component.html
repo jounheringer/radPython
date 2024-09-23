@@ -1,19 +1,8 @@
 <div class="containter">
 
-  <form class="row mt-3 gx-3 gy-2 align-items-center justify-content-center">
-    <div class="col-sm-6">
-      <label class="visually-hidden" for="addStudentInput">Aluno</label>
-      <input type="text" name="addStudentInput" placeholder="Novo Aluno" [(ngModel)]="newStudentText">
-    </div>
-    <div class="col-auto">
-      <button
-      type="submit"
-      class="btn btn-primary"
-      (click)="$event.preventDefault(); addNewStudent()">
-      Adicionar Aluno
-      </button>
-    </div>
-  </form>
+  <app-add-student-form
+    (addStudent)="addNewStudent($event)"
+  />
 
   <div class="row mt-3">
     <div class="col-sm-2">

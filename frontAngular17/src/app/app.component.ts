@@ -15,19 +15,15 @@ import { AddStudentFormComponent } from "./add-student-form/add-student-form.com
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  items : Student[] = [
-      new Student("joao", true),
-      new Student("tiago", false),
-      new Student("maria", false)
-  ];
+  items : Student[] = [];
   title = "Alunos";
   
   listFilter: String = "0";
 
   newStudentText = "";
   
-  addNewStudent() {
-    this.items.push(new Student(this.newStudentText, false))
+  addNewStudent(student: Student) {
+    this.items.push(student)
     this.newStudentText = ""
   }
 
