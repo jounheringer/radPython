@@ -20,14 +20,6 @@ export class AppComponent {
   title = "Alunos";
   
   filter: any = () => {}
-  
-  addNewStudent(student: Student) {
-    this.items.push(student)
-  }
-
-  get visibleList(): Student[] {
-    return this.items.filter(this.filter)
-  }
 }
 // export class  AppComponent implements OnInit {
 //   message: string = "";

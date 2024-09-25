@@ -1,7 +1,7 @@
 <div class="containter">
 
   <app-add-student-form
-    (addStudent)="addNewStudent($event)"
+    (addStudent)="items.push($event)"
   />
 
   <div class="row mt-3">
@@ -12,7 +12,7 @@
 
   <div>
     <app-student-list
-      [items]="visibleList">
+      [items]="items.filter(filter)">
     </app-student-list>
   </div>
 
