@@ -2,7 +2,7 @@
     <select 
       class="form-select"
       [(ngModel)]="listFilter"
-      (ngModelChange)="changeFilter($event)"
+      (ngModelChange)="updateFilter($event)"
     >
       <option value="" disabled></option>
       <option value="0">Todos</option>
