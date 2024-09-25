@@ -5,12 +5,13 @@ import { Student } from '../shared/models/student';
 import { FormsModule } from '@angular/forms';
 import { StudentListComponent } from "./student-list/student-list.component";
 import { AddStudentFormComponent } from "./add-student-form/add-student-form.component";
+import { StudentFilterComponent } from "./student-filter/student-filter.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,
-    FormsModule, StudentListComponent, AddStudentFormComponent],
+    FormsModule, StudentListComponent, AddStudentFormComponent, StudentFilterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,27 +19,14 @@ export class AppComponent {
   items : Student[] = [];
   title = "Alunos";
   
-  listFilter: String = "0";
-
-  newStudentText = "";
+  filter: any = () => {}
   
   addNewStudent(student: Student) {
     this.items.push(student)
-    this.newStudentText = ""
   }
 
   get visibleList(): Student[] {
-    let value = this.listFilter
-      switch (value){
-        case "0":
-          return this.items
-        case "1":
-          return this.items.filter(item => item.aproved)
-        case "2":
-          return this.items.filter(item => !item.aproved)
-        default:
-          return [];
-    }
+    return this.items.filter(this.filter)
   }
 }
 // export class  AppComponent implements OnInit {
