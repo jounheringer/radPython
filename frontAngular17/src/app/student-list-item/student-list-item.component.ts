@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import events from "./../../shared/services/EventService"
 
 @Component({
   selector: 'app-student-list-item',
@@ -17,6 +18,10 @@ export class StudentListItemComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  removeStudent() {
+    events.emit('removeStudent', this.name);
   }
 
   toogleApproved(){

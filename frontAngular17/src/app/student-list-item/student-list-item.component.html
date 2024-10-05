@@ -1,4 +1,4 @@
-<li>
+<li class="d-flex justify-content-between">
     <div class="form-check">
       <label class="form-check-label" for="student-List"></label>
       <input
@@ -10,4 +10,7 @@
         (click)="toogleApproved()"
       > {{ name }}
     </div>
+  <div>
+    <button type="button" class="btn-close" (click)="removeStudent()"></button>
+  </div>
   </li>
