@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import events from "./../../shared/services/EventService"
+import {EventService} from "../../shared/services/EventService"
 import {Student} from "../../shared/models/student";
 
 @Component({
@@ -12,14 +12,14 @@ import {Student} from "../../shared/models/student";
 export class StudentListItemComponent implements OnInit {
   @Input() student! : Student;
 
-  constructor() {}
+  constructor(private events: EventService) {}
 
   ngOnInit(): void {
 
   }
 
   removeStudent() {
-    events.emit('removeStudent', this.student.name);
+    this.events.emit('removeStudent', this.student.name);
   }
 
   toogleApproved(){

@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { StudentListComponent } from "./student-list/student-list.component";
 import { AddStudentFormComponent } from "./add-student-form/add-student-form.component";
 import { StudentFilterComponent } from "./student-filter/student-filter.component";
-import events from "./../shared/services/EventService"
+import {EventService} from "../shared/services/EventService"
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  providers: [EventService],
   imports: [RouterOutlet,
     FormsModule, StudentListComponent, AddStudentFormComponent, StudentFilterComponent],
   templateUrl: './app.component.html',
@@ -24,7 +25,7 @@ export class AppComponent {
   ];
   title = "Alunos";
 
-  constructor() {
+  constructor(events: EventService) {
     events.listen('removeStudent', (student: Student) => {
       let index = this.items.indexOf(student)
       this.items.splice(index, 1);
