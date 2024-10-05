@@ -25,9 +25,9 @@ export class AppComponent {
   title = "Alunos";
 
   constructor() {
-    events.listen('removeStudent', (student: string) => {
-    //   TODO
-      console.log(student);
+    events.listen('removeStudent', (student: Student) => {
+      let index = this.items.indexOf(student)
+      this.items.splice(index, 1);
     })
   }
 

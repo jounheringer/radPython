@@ -6,8 +6,7 @@
     <ul class="student-list">
       <app-student-list-item
         *ngFor="let student of items"
-        [name]="student.name"
-        [(approved)]="student.aproved"
+        [student]="student"
       />
     </ul>
 }

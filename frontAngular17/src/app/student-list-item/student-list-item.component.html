@@ -6,9 +6,9 @@
         type="checkbox"
         name="student-List"
         id="student-List"
-        [checked]="approved"
+        [checked]="student.aproved"
         (click)="toogleApproved()"
-      > {{ name }}
+      > {{ student.name }}
     </div>
   <div>
     <button type="button" class="btn-close" (click)="removeStudent()"></button>

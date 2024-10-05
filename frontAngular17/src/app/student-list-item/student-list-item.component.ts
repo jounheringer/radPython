@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import events from "./../../shared/services/EventService"
+import {Student} from "../../shared/models/student";
 
 @Component({
   selector: 'app-student-list-item',
@@ -9,10 +10,7 @@ import events from "./../../shared/services/EventService"
   styleUrl: './student-list-item.component.css'
 })
 export class StudentListItemComponent implements OnInit {
-  @Input() name : string = "";
-
-  @Input() approved: boolean = false;
-  @Output() approvedChange = new EventEmitter<boolean>();
+  @Input() student! : Student;
 
   constructor() {}
 
@@ -21,11 +19,10 @@ export class StudentListItemComponent implements OnInit {
   }
 
   removeStudent() {
-    events.emit('removeStudent', this.name);
+    events.emit('removeStudent', this.student.name);
   }
 
   toogleApproved(){
-    this.approved = !this.approved
-    this.approvedChange.emit(this.approved)
+    this.student.aproved = !this.student.aproved
   }
 }
