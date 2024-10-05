@@ -4,19 +4,10 @@
     </div>
 } @else {
     <ul class="student-list">
-      @for (item of items; track item){
-        <li>
-          <div class="form-check">
-            <label for="student-List"></label>
-            <input 
-              type="checkbox" 
-              name="student-List"
-              [checked]="item.aproved"
-              [attr.data-index]="$index"
-              (click)="toogleStudent(item)"
-            > {{ item.name }}
-          </div>
-        </li>
-        }
+      <app-student-list-item
+        *ngFor="let student of items"
+        [name]="student.name"
+        [(approved)]="student.aproved"
+      />
     </ul>
 }

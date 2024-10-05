@@ -1,0 +1,13 @@
+<li>
+    <div class="form-check">
+      <label class="form-check-label" for="student-List"></label>
+      <input
+        class="checkbox"
+        type="checkbox"
+        name="student-List"
+        id="student-List"
+        [checked]="approved"
+        (click)="toogleApproved()"
+      > {{ name }}
+    </div>
+  </li>
