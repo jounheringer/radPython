@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Student } from '../../shared/models/student';
+import { Student } from '../../../shared/models/student';
 import { FormsModule } from '@angular/forms';
 
 const filters = [
@@ -22,7 +22,7 @@ export class StudentFilterComponent implements OnInit {
 
   listFilter: String = "0";
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.updateFilter('0')
   }
 

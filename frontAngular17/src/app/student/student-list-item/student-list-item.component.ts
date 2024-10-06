@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {EventService} from "../../shared/services/EventService"
-import {Student} from "../../shared/models/student";
+import {EventService} from "../../../shared/services/EventService"
+import {Student} from "../../../shared/models/student";
 
 @Component({
   selector: 'app-student-list-item',

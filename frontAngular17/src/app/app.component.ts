@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {Student} from '../shared/models/student';
 import {FormsModule} from '@angular/forms';
-import {StudentListComponent} from "./student-list/student-list.component";
-import {AddStudentFormComponent} from "./add-student-form/add-student-form.component";
-import {StudentFilterComponent} from "./student-filter/student-filter.component";
+import {StudentModule} from "./student/student.module";
 import {EventService} from "../shared/services/EventService"
 import {ApiService} from "../shared/services/api.service";
 
@@ -12,14 +10,16 @@ import {ApiService} from "../shared/services/api.service";
   selector: 'app-root',
   standalone: true,
   providers: [EventService],
-  imports: [RouterOutlet,
-    FormsModule, StudentListComponent, AddStudentFormComponent, StudentFilterComponent],
+  imports: [
+    RouterOutlet,
+    FormsModule,
+    StudentModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  items: Student[] = [
-  ];
+  items: Student[] = [];
 
   constructor(events: EventService, private apiService: ApiService) {
     events.listen('removeStudent', (student: Student) => {
@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
     this.apiService.getStudents().subscribe(
       (data) => {
         this.items = data
-        console.log(data)
       })
   }
 
