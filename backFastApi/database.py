@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE = "postgresql://postgres:1234@localhost:5432/postgres"
+SQLALCHEMY_DATABASE = "postgresql://postgres:1234@localhost:5432/RadPython"
 
 engine = create_engine(SQLALCHEMY_DATABASE)
 

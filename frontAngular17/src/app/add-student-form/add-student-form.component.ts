@@ -1,4 +1,4 @@
-import { Component, output, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Student } from '../../shared/models/student';
 import { FormsModule } from '@angular/forms';
 
@@ -12,9 +12,9 @@ import { FormsModule } from '@angular/forms';
 export class AddStudentFormComponent {
   @Output() addStudent = new EventEmitter<Student>()
   newStudentText = "";
-  
+
   addNewStudent(student: string) {
-    this.addStudent.emit(new Student(student, false))
+    // this.addStudent.emit(new Student(student, false))
     this.newStudentText = ""
   }
 }

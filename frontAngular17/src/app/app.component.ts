@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Student } from '../shared/models/student';
-import { FormsModule } from '@angular/forms';
-import { StudentListComponent } from "./student-list/student-list.component";
-import { AddStudentFormComponent } from "./add-student-form/add-student-form.component";
-import { StudentFilterComponent } from "./student-filter/student-filter.component";
+import {Component, OnInit} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {Student} from '../shared/models/student';
+import {FormsModule} from '@angular/forms';
+import {StudentListComponent} from "./student-list/student-list.component";
+import {AddStudentFormComponent} from "./add-student-form/add-student-form.component";
+import {StudentFilterComponent} from "./student-filter/student-filter.component";
 import {EventService} from "../shared/services/EventService"
+import {ApiService} from "../shared/services/api.service";
 
 @Component({
   selector: 'app-root',
@@ -16,21 +17,25 @@ import {EventService} from "../shared/services/EventService"
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  items : Student[] = [
-    new Student("joao", false),
-    new Student("maria", true),
-    new Student("edu", false),
-    new Student("thiago", true)
+export class AppComponent implements OnInit {
+  items: Student[] = [
   ];
-  title = "Alunos";
 
-  constructor(events: EventService) {
+  constructor(events: EventService, private apiService: ApiService) {
     events.listen('removeStudent', (student: Student) => {
       let index = this.items.indexOf(student)
       this.items.splice(index, 1);
     })
   }
 
-  filter: any = () => {}
+  ngOnInit() {
+    this.apiService.getStudents().subscribe(
+      (data) => {
+        this.items = data
+        console.log(data)
+      })
+  }
+
+  filter: any = () => {
+  }
 }
