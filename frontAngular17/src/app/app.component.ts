@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {StudentModule} from "./student/student.module";
 import {EventService} from "../shared/services/EventService"
 import {ApiService} from "../shared/services/api.service";
+import {ContactModule} from "./contact/contact.module";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import {ApiService} from "../shared/services/api.service";
   imports: [
     RouterOutlet,
     FormsModule,
-    StudentModule
+    StudentModule,
+    ContactModule 
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
