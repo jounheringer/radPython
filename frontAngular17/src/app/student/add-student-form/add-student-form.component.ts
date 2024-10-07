@@ -1,20 +1,12 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Student } from '../../../shared/models/student';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-add-student-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './add-student-form.component.html',
   styleUrl: './add-student-form.component.css'
 })
-export class AddStudentFormComponent {
-  @Output() addStudent = new EventEmitter<Student>()
-  newStudentText = "";
-
-  addNewStudent(student: string) {
-    // this.addStudent.emit(new Student(student, false))
-    this.newStudentText = ""
-  }
-}
+export class AddStudentFormComponent { }

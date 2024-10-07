@@ -1,63 +1,68 @@
-<form
-  class="container p-5"
-  [formGroup]="formGroup"
-  (ngSubmit)="$event.preventDefault(); submitForm()"
->
-  <div class="mb-3">
-    <label class="form-label">Nome do aluno</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="sendName"
-    >
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input
-      type="email"
-      class="form-control"
-      formControlName="sendEmail"
-    >
-    <div
-      *ngIf="formGroup.get('sendEmail')?.invalid && ( formGroup.get('sendEmail')?.dirty || formGroup.get('sendEmail')?.touched )">
-      <small
-        class="text-danger"
-        *ngIf="formGroup.get('sendEmail')?.hasError('required')"
-      >Campo obrigatorio</small>
-      <small
-        class="text-danger"
-        *ngIf="formGroup.get('sendEmail')?.hasError('email')"
-      >Email invalido</small>
+<div class="container">
+    <a class="icon-link" routerLink="/studentList">
+      <i class="bi bi-arrow-left h2"></i>
+    </a>
+  <form
+    class="p-5"
+    [formGroup]="formGroup"
+    (ngSubmit)="$event.preventDefault(); submitForm()"
+  >
+    <div class="mb-3">
+      <label class="form-label">Nome do aluno</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="sendName"
+      >
     </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Serie</label>
-    <input
-      type="number"
-      class="form-control"
-      formControlName="sendGrade"
-    >
-  </div>
-  <!--<div class="mb-3">
-    <label class="form-label">Materias</label>
-    <ng-select
-      class="form-select"
-      [items]="courses"
-      bindLabel="courseName"
-      placeholder="Selecione materia(s)"
-      [fixedPlaceholder]="false"
-      [multiple]="true"
-      formControlName="sendCourses"
-    >
-    </ng-select>
-  </div>-->
-  <div class="mb-3">
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="formGroup.invalid"
-    >
-      Salvar aluno
-    </button>
-  </div>
-</form>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="sendEmail"
+      >
+      <div
+        *ngIf="formGroup.get('sendEmail')?.invalid && ( formGroup.get('sendEmail')?.dirty || formGroup.get('sendEmail')?.touched )">
+        <small
+          class="text-danger"
+          *ngIf="formGroup.get('sendEmail')?.hasError('required')"
+        >Campo obrigatorio</small>
+        <small
+          class="text-danger"
+          *ngIf="formGroup.get('sendEmail')?.hasError('email')"
+        >Email invalido</small>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Serie</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="sendGrade"
+      >
+    </div>
+    <!--<div class="mb-3">
+      <label class="form-label">Materias</label>
+      <ng-select
+        class="form-select"
+        [items]="courses"
+        bindLabel="courseName"
+        placeholder="Selecione materia(s)"
+        [fixedPlaceholder]="false"
+        [multiple]="true"
+        formControlName="sendCourses"
+      >
+      </ng-select>
+    </div>-->
+    <div class="mb-3">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="formGroup.invalid"
+      >
+        Salvar aluno
+      </button>
+    </div>
+  </form>
+</div>

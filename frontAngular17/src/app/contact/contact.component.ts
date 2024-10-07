@@ -3,6 +3,8 @@ import {FormControl, ReactiveFormsModule, FormGroup, Validators, FormsModule} fr
 import {NgIf} from "@angular/common";
 import { NgSelectModule} from "@ng-select/ng-select";
 import {ApiService} from "../../shared/services/api.service";
+import {RouterLink} from "@angular/router";
+
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +13,8 @@ import {ApiService} from "../../shared/services/api.service";
     ReactiveFormsModule,
     NgIf,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   providers: [ApiService],
   templateUrl: './contact.component.html',
