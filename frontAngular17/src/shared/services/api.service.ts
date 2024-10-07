@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
+import {PutStudentModel} from "../models/PutStudentModel";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,11 @@ export class ApiService {
 
   getStudents(): Observable<any> {
     return this.http.get(`${this.apiUrl}/`).pipe(catchError(this.handlerError))
+  }
+
+  addStudent(student: PutStudentModel) : Observable<any> {
+    console.log(student)
+    return this.http.post(`${this.apiUrl}/`, student).pipe(catchError(this.handlerError))
   }
 
   private handlerError(error: HttpErrorResponse) {

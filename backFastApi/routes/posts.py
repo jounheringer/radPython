@@ -1,17 +1,18 @@
+from datetime import datetime
 from typing import List
 from fastapi import HTTPException, Depends
 from sqlalchemy.orm import Session
 from starlette import status
-from models import student as modelStudent
-import Schema
 from fastapi import APIRouter
-from database import get_db
+
+import Schema
+from Database import get_db
+from models import Student as modelStudent
 
 router = APIRouter(
     prefix='/alunos',
     tags=['alunos']
 )
-
 
 @router.get('/', response_model=List[Schema.CreatePost])
 def test_alunos(db: Session = Depends(get_db)):
@@ -22,7 +23,10 @@ def test_alunos(db: Session = Depends(get_db)):
 
 @router.post('/', status_code=status.HTTP_201_CREATED, response_model=List[Schema.CreatePost])
 def test_posts_sent(post_post: Schema.CreatePost, db: Session = Depends(get_db)):
-    new_post = modelStudent.Student(**post_post.dict())
+    aux_student = post_post.model_dump()
+    aux_student['date_created'] = datetime.now()
+    aux_student['date_updated'] = datetime.now()
+    new_post = modelStudent.Student(**aux_student)
     db.add(new_post)
     db.commit()
     db.refresh(new_post)

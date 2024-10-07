@@ -1,6 +1,6 @@
 <form
-  class="conainer p-5"
-  [formGroup]="contactForm"
+  class="container p-5"
+  [formGroup]="formGroup"
   (ngSubmit)="$event.preventDefault(); submitForm()"
 >
   <div class="mb-3">
@@ -18,30 +18,44 @@
       class="form-control"
       formControlName="sendEmail"
     >
-    <div *ngIf="contactForm.get('sendEmail')?.invalid && ( contactForm.get('sendEmail')?.dirty || contactForm.get('sendEmail')?.touched )">
+    <div
+      *ngIf="formGroup.get('sendEmail')?.invalid && ( formGroup.get('sendEmail')?.dirty || formGroup.get('sendEmail')?.touched )">
       <small
         class="text-danger"
-        *ngIf="contactForm.get('sendEmail')?.hasError('required')"
+        *ngIf="formGroup.get('sendEmail')?.hasError('required')"
       >Campo obrigatorio</small>
       <small
         class="text-danger"
-        *ngIf="contactForm.get('sendEmail')?.hasError('email')"
+        *ngIf="formGroup.get('sendEmail')?.hasError('email')"
       >Email invalido</small>
     </div>
   </div>
   <div class="mb-3">
-    <label class="form-label">Mensagem</label>
-    <textarea
-      rows="3"
+    <label class="form-label">Serie</label>
+    <input
+      type="number"
       class="form-control"
-      formControlName="sendMessage"
-    ></textarea>
+      formControlName="sendGrade"
+    >
   </div>
+  <!--<div class="mb-3">
+    <label class="form-label">Materias</label>
+    <ng-select
+      class="form-select"
+      [items]="courses"
+      bindLabel="courseName"
+      placeholder="Selecione materia(s)"
+      [fixedPlaceholder]="false"
+      [multiple]="true"
+      formControlName="sendCourses"
+    >
+    </ng-select>
+  </div>-->
   <div class="mb-3">
     <button
       type="submit"
       class="btn btn-primary"
-      [disabled]="contactForm.invalid"
+      [disabled]="formGroup.invalid"
     >
       Salvar aluno
     </button>

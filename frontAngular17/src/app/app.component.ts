@@ -1,10 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {Student} from '../shared/models/student';
 import {FormsModule} from '@angular/forms';
 import {StudentModule} from "./student/student.module";
 import {EventService} from "../shared/services/EventService"
-import {ApiService} from "../shared/services/api.service";
 import {ContactModule} from "./contact/contact.module";
 
 @Component({
@@ -15,28 +13,9 @@ import {ContactModule} from "./contact/contact.module";
     RouterOutlet,
     FormsModule,
     StudentModule,
-    ContactModule 
+    ContactModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  items: Student[] = [];
-
-  constructor(events: EventService, private apiService: ApiService) {
-    events.listen('removeStudent', (student: Student) => {
-      let index = this.items.indexOf(student)
-      this.items.splice(index, 1);
-    })
-  }
-
-  ngOnInit() {
-    this.apiService.getStudents().subscribe(
-      (data) => {
-        this.items = data
-      })
-  }
-
-  filter: any = () => {
-  }
-}
+export class AppComponent {}
