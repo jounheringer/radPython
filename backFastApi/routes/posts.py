@@ -14,15 +14,14 @@ router = APIRouter(
     tags=['alunos']
 )
 
-@router.get('/', response_model=List[Schema.CreatePost])
+@router.get('/', response_model=List[Schema.CreateGetStudent])
 def test_alunos(db: Session = Depends(get_db)):
     alunos = db.query(modelStudent.Student).all()
-
     return alunos
 
 
-@router.post('/', status_code=status.HTTP_201_CREATED, response_model=List[Schema.CreatePost])
-def test_posts_sent(post_post: Schema.CreatePost, db: Session = Depends(get_db)):
+@router.post('/', status_code=status.HTTP_201_CREATED, response_model=List[Schema.CreatePostStudent])
+def test_posts_sent(post_post: Schema.CreatePostStudent, db: Session = Depends(get_db)):
     aux_student = post_post.model_dump()
     aux_student['date_created'] = datetime.now()
     aux_student['date_updated'] = datetime.now()
@@ -34,7 +33,7 @@ def test_posts_sent(post_post: Schema.CreatePost, db: Session = Depends(get_db))
     return [new_post]
 
 
-@router.get('/{id}', response_model=Schema.CreatePost, status_code=status.HTTP_200_OK)
+@router.get('/{id}', response_model=Schema.CreateGetStudent, status_code=status.HTTP_200_OK)
 def get_test_one_post(id: int, db: Session = Depends(get_db)):
     idv_post = db.query(modelStudent.Student).filter(modelStudent.Student.id == id).first()
 
@@ -55,8 +54,8 @@ def delete_test_post(id: int, db: Session = Depends(get_db)):
     db.commit()
 
 
-@router.put('/posts/{id}', response_model=Schema.CreatePost)
-def update_test_post(update_post: Schema.PostBase, id: int, db: Session = Depends(get_db)):
+@router.put('/posts/{id}', response_model=Schema.CreateGetStudent)
+def update_test_post(update_post: Schema.GetStudentBase, id: int, db: Session = Depends(get_db)):
     updated_post = db.query(modelStudent.Post).filter(modelStudent.Post.id == id)
 
     if updated_post.first() is None:

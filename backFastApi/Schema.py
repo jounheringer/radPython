@@ -1,6 +1,24 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
-class PostBase(BaseModel):
+class GetStudentBase(BaseModel):
+    id: int
+    name: str
+    serie: int
+    email: str
+    approved: bool
+    date_created: datetime
+    date_updated: datetime
+
+    class Config:
+        from_attributes = True
+
+class CreateGetStudent(GetStudentBase):
+    class Config:
+        from_attributes=True
+
+class PostStudentBase(BaseModel):
     name: str
     serie: int
     email: str
@@ -9,6 +27,7 @@ class PostBase(BaseModel):
     class Config:
         from_attributes = True
 
-class CreatePost(PostBase):
+class CreatePostStudent(PostStudentBase):
     class Config:
         from_attributes=True
+

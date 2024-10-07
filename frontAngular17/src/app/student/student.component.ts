@@ -30,7 +30,10 @@ export class StudentComponent implements OnInit {
   ngOnInit() {
     this.apiService.getStudents().subscribe(
       (data) => {
-        this.items = data
+        {
+          this.items = data
+          console.log(data)
+        }
       })
   }
 
