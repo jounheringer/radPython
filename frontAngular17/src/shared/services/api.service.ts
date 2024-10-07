@@ -16,8 +16,11 @@ export class ApiService {
   }
 
   addStudent(student: PutStudentModel) : Observable<any> {
-    console.log(student)
     return this.http.post(`${this.apiUrl}/`, student).pipe(catchError(this.handlerError))
+  }
+
+  removeStudent(id: Number) : Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`).pipe(catchError(this.handlerError))
   }
 
   private handlerError(error: HttpErrorResponse) {

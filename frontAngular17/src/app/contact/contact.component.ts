@@ -34,7 +34,7 @@ export class ContactComponent {
   formGroup = new FormGroup({
     sendName: new FormControl("", Validators.required),
     sendEmail: new FormControl("", [Validators.required, Validators.email]),
-    sendGrade: new FormControl(0, Validators.required),
+    sendGrade: new FormControl(undefined, Validators.required),
   })
 
   submitForm() {
@@ -44,8 +44,11 @@ export class ContactComponent {
         serie: this.formGroup.get('sendGrade')?.value!,
         email: this.formGroup.get('sendEmail')?.value!,
         approved: false
-      }).subscribe(
-        (data) => console.log(data));
+      }).subscribe( () =>
+        {
+          this.formGroup.reset()
+        }
+      );
     }
   }
 }

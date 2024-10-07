@@ -32,7 +32,6 @@ export class StudentComponent implements OnInit {
       (data) => {
         {
           this.items = data
-          console.log(data)
         }
       })
   }

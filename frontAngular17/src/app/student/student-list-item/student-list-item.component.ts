@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {EventService} from "../../../shared/services/EventService"
 import {Student} from "../../../shared/models/student";
+import {ApiService} from "../../../shared/services/api.service";
 
 @Component({
   selector: 'app-student-list-item',
@@ -12,14 +13,15 @@ import {Student} from "../../../shared/models/student";
 export class StudentListItemComponent implements OnInit {
   @Input() student! : Student;
 
-  constructor(private events: EventService) {}
+  constructor(private events: EventService, private api: ApiService) {}
 
   ngOnInit(): void {
 
   }
 
   removeStudent() {
-    this.events.emit('removeStudent', this.student.name);
+    this.events.emit('removeStudent', this.student.id);
+    this.api.removeStudent(this.student.id).subscribe()
   }
 
   toogleApproved(){
