@@ -1,7 +1,7 @@
-@if(items.length === 0) {
-    <div>
-      <h6>Nenhum aluno cadastrado no momento.</h6>
-    </div>
+@if (items.length === 0) {
+  <div>
+    <h6>Nenhum aluno cadastrado no momento.</h6>
+  </div>
 } @else {
   <table class="table">
     <thead>
@@ -14,23 +14,19 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of items">
-        <td>{{student.id}}</td>
-        <td>{{student.name}}</td>
-        <td>{{student.email}}</td>
-        <td>
-          <input type="checkbox">
-        </td>
-        <td>
-          <button class="btn-close"></button>
-        </td>
-      </tr>
+    <tr *ngFor="let student of items">
+      <td>{{ student.id }}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.email }}</td>
+      <td>
+        <input type="checkbox"
+               [checked]="student.aproved"
+               (click)="$event.preventDefault(); toogleApproved(student)">
+      </td>
+      <td>
+        <button class="btn-close" (click)="$event.preventDefault();removeStudent(student)"></button>
+      </td>
+    </tr>
     </tbody>
   </table>
-    <ul class="student-list">
-      <app-student-list-item
-        *ngFor="let student of items"
-        [student]="student"
-      />
-    </ul>
 }
