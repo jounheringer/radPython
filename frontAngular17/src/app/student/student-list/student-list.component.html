@@ -3,6 +3,30 @@
       <h6>Nenhum aluno cadastrado no momento.</h6>
     </div>
 } @else {
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Aprovado</th>
+      <th scope="col">Excluir</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of items">
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.email}}</td>
+        <td>
+          <input type="checkbox">
+        </td>
+        <td>
+          <button class="btn-close"></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
     <ul class="student-list">
       <app-student-list-item
         *ngFor="let student of items"
