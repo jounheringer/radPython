@@ -4,6 +4,7 @@ import {NgIf} from "@angular/common";
 import { NgSelectModule} from "@ng-select/ng-select";
 import {ApiService} from "../../shared/services/api.service";
 import {RouterLink} from "@angular/router";
+import {generateFromEmail} from "unique-username-generator";
 
 
 @Component({
@@ -42,6 +43,7 @@ export class ContactComponent {
       this.apiService.addStudent({
         name: this.formGroup.get('sendName')?.value!,
         userpassword: "aluno123",
+        username: generateFromEmail(this.formGroup.get('sendEmail')?.value!, 3),
         serie: this.formGroup.get('sendGrade')?.value!,
         email: this.formGroup.get('sendEmail')?.value!,
         approved: false

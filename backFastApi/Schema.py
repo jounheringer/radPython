@@ -23,6 +23,7 @@ class CreateGetStudent(GetStudentBase):
 class PostStudentBase(BaseModel):
     name: str
     userpassword: str
+    username: str
     serie: int
     email: str
     approved: bool
@@ -48,6 +49,7 @@ class CreateLogin(LoginBase):
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
+    username: str
     date_created: datetime
 
     class Config:

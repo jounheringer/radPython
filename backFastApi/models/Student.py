@@ -6,6 +6,7 @@ class Student(base):
     __tablename__ = "alunos"
 
     id = Column(Integer, primary_key=True, nullable=False)
+    username = Column(String, nullable=False)
     name = Column(String, nullable=False)
     userpassword = Column(String, nullable=False)
     serie = Column(Integer, nullable=False)

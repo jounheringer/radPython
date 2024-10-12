@@ -3,6 +3,7 @@ export class PutStudentModel {
     public name: string,
     public serie: number,
     public userpassword: string,
+    public username: string,
     public email: string,
     public approved: boolean,
   ) { }
