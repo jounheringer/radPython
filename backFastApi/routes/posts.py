@@ -25,6 +25,7 @@ def test_posts_sent(post_post: Schema.CreatePostStudent, db: Session = Depends(g
     aux_student = post_post.model_dump()
     aux_student['date_created'] = datetime.now()
     aux_student['date_updated'] = datetime.now()
+    aux_student['userpassword'] = "aluno123"
     new_post = modelStudent.Student(**aux_student)
     db.add(new_post)
     db.commit()
@@ -54,8 +55,8 @@ def delete_test_post(id: int, db: Session = Depends(get_db)):
     db.commit()
 
 
-@router.put('/posts/{id}', response_model=Schema.CreateGetStudent)
-def update_test_post(update_post: Schema.GetStudentBase, id: int, db: Session = Depends(get_db)):
+@router.put('/student/{id}', response_model=Schema.CreateGetStudent)
+def update_test_post(update_post: Schema.PostStudentBase, id: int, db: Session = Depends(get_db)):
     updated_post = db.query(modelStudent.Post).filter(modelStudent.Post.id == id)
 
     if updated_post.first() is None:

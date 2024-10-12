@@ -7,6 +7,7 @@ class Student(base):
 
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
+    userpassword = Column(String, nullable=False)
     serie = Column(Integer, nullable=False)
     email = Column(String, nullable=False)
     approved = Column(Boolean, nullable=False)

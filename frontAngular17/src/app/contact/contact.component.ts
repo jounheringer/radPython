@@ -41,12 +41,19 @@ export class ContactComponent {
     if (this.formGroup.valid){
       this.apiService.addStudent({
         name: this.formGroup.get('sendName')?.value!,
+        userpassword: "aluno123",
         serie: this.formGroup.get('sendGrade')?.value!,
         email: this.formGroup.get('sendEmail')?.value!,
         approved: false
-      }).subscribe( () =>
+      }).subscribe( (data) =>
         {
-          this.formGroup.reset()
+          if (data.status === 201){
+            this.formGroup.reset()
+            alert("Usuario criado com sucesso, senha padrao para o primeiro login: aluno123")
+          }
+          else {
+            alert("Erro ao criar um aluno")
+          }
         }
       );
     }

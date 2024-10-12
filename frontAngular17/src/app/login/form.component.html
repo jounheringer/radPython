@@ -1,0 +1,35 @@
+<div class="container">
+  <form
+    class="p-5"
+    [formGroup]="formGroup"
+    (ngSubmit)="$event.preventDefault(); submitForm()"
+  >
+    <div class="mb-3">
+      <label class="form-label">Usuario/Matricula</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Insira usuario ou matricula"
+        formControlName="sendLogin"
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Insira senha"
+        formControlName="sendPassword"
+      >
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Lembrar login</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+
+  <div class="p-5">
+    <p><a href="#" class="link-offset-2 link-underline link-underline-opacity-0">Esqueci minha senha</a></p>
+  </div>
+</div>
