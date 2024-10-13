@@ -33,6 +33,7 @@ async def register(request: Request, user_credentials: Schema.CreatePostStudent,
                        userpassword=user_credentials.userpassword,
                        username=user_credentials.username,
                        approved=False,
+                       first_login=True,
                        date_created=datetime.now(),
                        date_updated=datetime.now())
     db.add(new_user)

@@ -8,6 +8,7 @@ from fastapi import APIRouter
 import Schema
 from Database import get_db
 from models import Student as modelStudent
+from models.Student import Student
 
 router = APIRouter(
     prefix='/alunos',
@@ -55,13 +56,13 @@ def delete_test_post(id: int, db: Session = Depends(get_db)):
     db.commit()
 
 
-@router.put('/student/{id}', response_model=Schema.CreateGetStudent)
-def update_test_post(update_post: Schema.PostStudentBase, id: int, db: Session = Depends(get_db)):
-    updated_post = db.query(modelStudent.Post).filter(modelStudent.Post.id == id)
+@router.put('/first/{id_user}', status_code=status.HTTP_200_OK)
+def update_test_post(update_post: Schema.LoginBase, id_user: int, db: Session = Depends(get_db)):
+    updated_post = db.query(Student).filter(Student.id == id_user)
 
     if updated_post.first() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"The id:{id} does not exist")
-    updated_post.update(update_post.dict(), synchronize_session=False)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"The id:{id_user} does not exist")
+    updated_post.update(update_post.model_dump(), synchronize_session=False)
     db.commit()
 
-    return updated_post.first()
+    return status.HTTP_200_OK

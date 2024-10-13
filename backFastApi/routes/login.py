@@ -21,7 +21,6 @@ async def login(user_credentials: Annotated[OAuth2PasswordRequestForm, Depends()
     user = db.query(Student).filter(
         Student.username == user_credentials.username
     ).first()
-    print(user)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -30,5 +29,7 @@ async def login(user_credentials: Annotated[OAuth2PasswordRequestForm, Depends()
     access_token = Hasher.create_access_token(data={'user_id':user.id})
     return {
         "message": "User verified",
-        "token": access_token
+        "token": access_token,
+        "first_login": user.first_login,
+        "user_id": user.id,
     }

@@ -36,7 +36,7 @@ class CreatePostStudent(PostStudentBase):
         from_attributes=True
 
 class LoginBase(BaseModel):
-    login: str
+    username: str
     userpassword: str
 
     class Config:

@@ -40,6 +40,10 @@ export class ApiService {
     return this.http.post(`${this.loginApiUrl}`, login, {observe: "response"}).pipe(catchError(this.handlerError))
   }
 
+  updateFirstLogin(login: LoginModel, id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/first/${id}`, login)
+  }
+
   private handlerError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error("Existe algum problema com o lado do cliente ou internet: ", error);

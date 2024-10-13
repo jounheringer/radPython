@@ -14,3 +14,4 @@ class Student(base):
     approved = Column(Boolean, nullable=False)
     date_created = Column(TIMESTAMP, nullable=False)
     date_updated = Column(TIMESTAMP, nullable=False)
+    first_login = Column(Boolean, nullable=False)

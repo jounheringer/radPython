@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {Router, RouterLink} from "@angular/router";
 import {ApiService} from "../../shared/services/api.service";
+import {MatDialog, MatDialogConfig, MatDialogModule} from "@angular/material/dialog";
+import {LoginDialogComponent} from "./login-dialog/login-dialog.component";
 
 @Component({
   selector: 'app-form',
@@ -13,14 +15,15 @@ import {ApiService} from "../../shared/services/api.service";
     NgIf,
     NgSelectModule,
     FormsModule,
-    RouterLink
+    RouterLink,
+    MatDialogModule
   ],
   providers: [ApiService],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
 export class FormComponent {
-  constructor(private api: ApiService, private router: Router) {
+  constructor(private api: ApiService, private router: Router, private dialog: MatDialog) {
   }
 
   formGroup = new FormGroup({
@@ -30,15 +33,47 @@ export class FormComponent {
   })
 
   submitForm() {
-    if (this.formGroup.valid){
+    if (this.formGroup.valid) {
       const formData = new FormData()
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
 
       formData.append("username", this.formGroup.get("sendLogin")?.value!)
       formData.append("password", this.formGroup.get("sendPassword")?.value!)
+
+      dialogConfig.data = {
+        id: 1,
+        title: 'Primeiro login, altere seu nome de usuario e senha'
+      };
       this.api.validateLogin(formData).subscribe(
         data => {
-          if (data.status === 200){
-            this.router.navigate(["/studentList"])
+          const userId = data.body.user_id
+          const firstLogin = data.body.first_login
+          if (data.status === 200) {
+            if (!firstLogin) {
+              const dialogRef = this.dialog.open(LoginDialogComponent, dialogConfig)
+
+              dialogRef.afterClosed().subscribe(
+                (data) => {
+                  this.api.updateFirstLogin(
+                    {
+                      "username": data.newUsername,
+                      "userpassword": data.newPassword
+                    },
+                    userId
+                  ).subscribe(
+                    data => {
+                      if (data === 200) {
+                        this.router.navigate(["/studentList"])
+                      }
+                    }
+                  )
+                }
+              )
+            } else {
+              this.router.navigate(["/studentList"])
+            }
           }
         }
       )
