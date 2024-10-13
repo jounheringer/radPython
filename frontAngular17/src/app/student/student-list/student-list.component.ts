@@ -5,20 +5,17 @@ import { FormsModule } from '@angular/forms';
 import {NgForOf} from "@angular/common";
 import {ApiService} from "../../../shared/services/api.service";
 import {EventService} from "../../../shared/services/EventService";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [FormsModule, StudentListItemComponent, NgForOf],
+  imports: [FormsModule, StudentListItemComponent, NgForOf, RouterLink],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
 export class StudentListComponent {
   @Input() items: Student[] = []
-
-  toogleStudent(student: Student) {
-    student.aproved = !student.aproved;
-  }
 
   constructor(private api: ApiService, private events: EventService) { }
 

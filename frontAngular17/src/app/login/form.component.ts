@@ -46,12 +46,15 @@ export class FormComponent {
         id: 1,
         title: 'Primeiro login, altere seu nome de usuario e senha'
       };
+
       this.api.validateLogin(formData).subscribe(
         data => {
+          console.log(data)
           const userId = data.body.user_id
           const firstLogin = data.body.first_login
+          console.log(firstLogin)
           if (data.status === 200) {
-            if (!firstLogin) {
+            if (firstLogin) {
               const dialogRef = this.dialog.open(LoginDialogComponent, dialogConfig)
 
               dialogRef.afterClosed().subscribe(

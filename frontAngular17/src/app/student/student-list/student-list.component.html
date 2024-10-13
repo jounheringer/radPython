@@ -16,12 +16,10 @@
     <tbody>
     <tr *ngFor="let student of items">
       <td>{{ student.id }}</td>
-      <td>{{ student.name }}</td>
+      <td><a routerLink="/addStudent">{{ student.name }}</a></td>
       <td>{{ student.email }}</td>
       <td>
-        <input type="checkbox"
-               [checked]="student.aproved"
-               (click)="$event.preventDefault(); toogleApproved(student)">
+        <i class="{{student.aproved ? 'bi bi-check2' : 'bi bi-x-lg' }}"></i>
       </td>
       <td>
         <button class="btn-close" (click)="$event.preventDefault();removeStudent(student)"></button>

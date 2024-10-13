@@ -62,6 +62,8 @@ def update_test_post(update_post: Schema.LoginBase, id_user: int, db: Session = 
 
     if updated_post.first() is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"The id:{id_user} does not exist")
+    aux_post = update_post.model_dump()
+    aux_post['first_login'] = False
     updated_post.update(update_post.model_dump(), synchronize_session=False)
     db.commit()
 
