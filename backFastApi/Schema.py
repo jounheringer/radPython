@@ -1,6 +1,6 @@
 from datetime import datetime
+from typing import List
 
-from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel, EmailStr
 
 
@@ -53,7 +53,7 @@ class UserResponse(BaseModel):
     date_created: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class RegistrationUserRepsonse(BaseModel):
     message:str
@@ -62,3 +62,26 @@ class RegistrationUserRepsonse(BaseModel):
 class TokenResponse(BaseModel):
     message: str
     token: str
+
+class BaseSubject(BaseModel):
+    subject_name: str
+    id_user: int
+
+class RegistrationSubject(BaseModel):
+    message:str
+    data: BaseSubject
+
+class Subjects(BaseModel):
+    id: int
+    subject_name: str
+    grade1: float
+    grade2: float
+    grade3: float
+    final_grade: float
+    class Config:
+        from_attributes = True
+
+class StudentWithSubjects(BaseModel):
+    student: GetStudentBase
+    subjects: List[Subjects] = []
+

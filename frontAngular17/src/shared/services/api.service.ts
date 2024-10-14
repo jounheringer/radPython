@@ -4,6 +4,7 @@ import {catchError, Observable, throwError} from 'rxjs';
 import {PutStudentModel} from "../models/PutStudentModel";
 import {Student} from "../models/student";
 import {LoginModel} from "../models/LoginModel";
+import {SubjectModel} from "../models/SubjectModel";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ApiService {
   private apiUrl = "http://127.0.0.1:8000/alunos";
   private registerApiUrl = "http://127.0.0.1:8000/register";
   private loginApiUrl = "http://127.0.0.1:8000/login";
+  private subjectApiUrl = "http://127.0.0.1:8000/subject";
 
   constructor(private http: HttpClient) {
   }
@@ -22,6 +24,9 @@ export class ApiService {
 
   getStudents(): Observable<any> {
     return this.http.get(`${this.apiUrl}/`).pipe(catchError(this.handlerError))
+  }
+  getStudent(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`).pipe(catchError(this.handlerError))
   }
 
   addStudent(student: PutStudentModel): Observable<any> {
@@ -42,6 +47,14 @@ export class ApiService {
 
   updateFirstLogin(login: LoginModel, id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/first/${id}`, login)
+  }
+
+  addSubject(subject: {subject_name: string, id_user: number}): Observable<any> {
+    return this.http.post(`${this.subjectApiUrl}/`, subject)
+  }
+
+  editSubject(subject: SubjectModel): Observable<any> {
+    return this.http.put(`${this.subjectApiUrl}/${subject.id}`, subject)
   }
 
   private handlerError(error: HttpErrorResponse) {

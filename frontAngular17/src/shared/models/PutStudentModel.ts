@@ -5,6 +5,6 @@ export class PutStudentModel {
     public userpassword: string,
     public username: string,
     public email: string,
-    public approved: boolean,
+    public approved: boolean
   ) { }
 }

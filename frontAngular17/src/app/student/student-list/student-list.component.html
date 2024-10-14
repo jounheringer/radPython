@@ -16,7 +16,7 @@
     <tbody>
     <tr *ngFor="let student of items">
       <td>{{ student.id }}</td>
-      <td><a routerLink="/addStudent">{{ student.name }}</a></td>
+      <td><a [routerLink]="['/studentForm', student.id]">{{ student.name }}</a></td>
       <td>{{ student.email }}</td>
       <td>
         <i class="{{student.aproved ? 'bi bi-check2' : 'bi bi-x-lg' }}"></i>

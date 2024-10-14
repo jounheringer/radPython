@@ -7,6 +7,7 @@ from starlette.requests import Request
 
 import Schema
 from Database import get_db
+from models.Courses import Courses
 from models.Student import Student
 from utils.Hash import Hasher
 
@@ -19,7 +20,6 @@ router = APIRouter(
 @router.post('/', status_code=status.HTTP_201_CREATED, response_model=Schema.RegistrationUserRepsonse)
 async def register(request: Request, user_credentials: Schema.CreatePostStudent, db: Session = Depends(get_db)):
     email_check = db.query(Student).filter(Student.username == user_credentials.username).first()
-    print(email_check)
     if email_check is not None:
         raise HTTPException(
             detail='Nome de usuario ja existe',

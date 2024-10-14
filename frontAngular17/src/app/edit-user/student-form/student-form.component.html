@@ -1,1 +1,98 @@
-<p>student-form works!</p>
+<div class="container">
+  <a class="icon-link" routerLink="/studentList">
+    <i class="bi bi-arrow-left h2"></i>
+  </a>
+  <div>
+    <p>Nome: {{ student?.name }}</p>
+    <p>Serie: {{ student?.serie }}</p>
+    <p>Aprovado: {{ student?.aproved ? "Sim" : "Não" }}</p>
+    <form
+      class="p-5"
+      (ngSubmit)="$event.preventDefault(); submitForm()"
+    >
+      <div class="mb-3">
+        <label class="form-label">Adicionar materias</label>
+        <mat-select class="form-control" [formControl]="sendCourses">
+          @for (course of showCourses; track course) {
+            <mat-option [value]="course">{{ course }}</mat-option>
+          }
+        </mat-select>
+      </div>
+      <div class="mb-3">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="sendCourses.invalid"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngFor="let subject of subjectList" class="card">
+    <form [formGroup]="formGroup" (submit)="$event.preventDefault(); submitSubjectForm(subject) " class="card-body">
+      <h5 class="card-title">{{ subject.subject_name }}</h5>
+      <div class="d-flex flex-row">
+        <div class="d-flex flex-column form-control-sm">
+          <label class="form-label">Nota 1</label>
+          <input
+            type="number"
+            placeholder="{{subject.grade1 > 0 ? subject.grade1 : 'Nota1'}}"
+            formControlName="n1"
+            [readOnly]="subject.grade1 > 0"
+          >
+          <div *ngIf="formGroup.get('n1')?.invalid && ( formGroup.get('n1')?.dirty || formGroup.get('n1')?.touched )">
+            <small
+              class="text-danger"
+              *ngIf="formGroup.get('n1')?.hasError('max')"
+            >Valor maior que 10</small>
+          </div>
+        </div>
+        <div class="d-flex flex-column form-control-sm">
+          <label class="form-label">Nota 2</label>
+          <input
+            type="number"
+            placeholder="{{subject.grade1 > 0 ? subject.grade1 : 'Nota2'}}"
+            [readOnly]="subject.grade1 > 0"
+            formControlName="n2"
+          >
+          <div *ngIf="formGroup.get('n2')?.invalid && ( formGroup.get('n2')?.dirty || formGroup.get('n2')?.touched )">
+            <small
+              class="text-danger"
+              *ngIf="formGroup.get('n2')?.hasError('max')"
+            >Valor maior que 10</small>
+          </div>
+        </div>
+        <div class="d-flex flex-column form-control-sm">
+          <label class="form-label">Nota 3</label>
+          <input
+            type="number"
+            placeholder="{{subject.grade1 > 0 ? subject.grade1 : 'Nota3'}}"
+            [readOnly]="subject.grade1 > 0"
+            formControlName="n3"
+          >
+          <div *ngIf="formGroup.get('n3')?.invalid && ( formGroup.get('n3')?.dirty || formGroup.get('n3')?.touched )">
+            <small
+              class="text-danger"
+              *ngIf="formGroup.get('n3')?.hasError('max')"
+            >Valor maior que 10</small>
+          </div>
+        </div>
+        <div class="d-flex flex-column form-control-sm ml-auto">
+          <label class="form-label">Media</label>
+          <input
+            class="disabled"
+            type="text"
+            placeholder="{{subject.grade1 > 0 ? subject.grade1 : 'Media'}}"
+            [readOnly]="subject.grade1 > 0"
+            formControlName="final"
+            value="{{formGroup.get('final')?.value! | number : '1.1-1'}}"
+            readonly
+          >
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary {{subject.final_grade > 0 ? 'disabled' : ''}}">Salvar</button>
+    </form>
+  </div>
+</div>

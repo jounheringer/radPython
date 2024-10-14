@@ -5,6 +5,8 @@ import { NgSelectModule} from "@ng-select/ng-select";
 import {ApiService} from "../../shared/services/api.service";
 import {RouterLink} from "@angular/router";
 import {generateFromEmail} from "unique-username-generator";
+import {MatFormField} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
 
 
 @Component({
@@ -15,7 +17,10 @@ import {generateFromEmail} from "unique-username-generator";
     NgIf,
     NgSelectModule,
     FormsModule,
-    RouterLink
+    RouterLink,
+    MatFormField,
+    MatSelect,
+    MatOption
   ],
   providers: [ApiService],
   templateUrl: './contact.component.html',
@@ -25,12 +30,6 @@ export class ContactComponent {
 
   constructor(private apiService: ApiService) {
   }
-  courses = [
-    {id: 1, courseName: "Matematica"},
-    {id: 2, courseName: "Ciencia"},
-    {id: 3, courseName: "Portugues"},
-    {id: 4, courseName: "Filosofia"},
-  ]
 
   formGroup = new FormGroup({
     sendName: new FormControl("", Validators.required),
